@@ -5,25 +5,35 @@ import random
 import time
 import websockets
 
-am=2
-ct=23
-fr=0.1
+am1 = 2
+ct1 = 23
+fr1 = 0.1
 
-def generate_data():
-    value = ct + am * math.sin(fr*time.time())
-    value += random.gauss(0, 0.2)
-
-    return round(value, 1)
+am2 = 8
+ct2 = 50
+fr2 = 0.1
 
 
 async def handle_client(websocket):
     print("Клиент подключился")
 
     while True:
+        current_time = time.time()
+        
+
+        val1 = ct1 + am1 * math.sin(fr1 * current_time)
+        val1 += random.gauss(0, 0.2)
+        
+
+        val2 = ct2 + am2 * math.cos(fr2 * current_time)
+        val2 += random.gauss(0, 0.4)
+        
+
         data = {
-            "chartId": "sensor_1",
-            "value": generate_data()
+            "sensor_1": round(val1, 1),
+            "sensor_2": round(val2, 1)
         }
+
 
         await websocket.send(json.dumps(data))
 
@@ -36,4 +46,5 @@ async def main():
         await asyncio.Future()
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
