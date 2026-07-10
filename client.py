@@ -17,6 +17,5 @@ async def main():
 
             print(f"Источник: {data['chartId']}")
             print(f"Значение: {data['value']}")
-            print()
 
 asyncio.run(main())
