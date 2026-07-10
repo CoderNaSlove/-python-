@@ -51,7 +51,7 @@ async def handle_client(websocket):
     except websockets.exceptions.ConnectionClosed:
         print("Клиент отключился")
     except Exception as e:
-        print("Произошла ошибка: {e}")
+        print(f"Произошла ошибка: {e}")
 
         
 async def main():
